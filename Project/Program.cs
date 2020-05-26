@@ -8,6 +8,7 @@ namespace Project
 {
     static class Program
     {
+        public static WFTEntities1 wftDb = new WFTEntities1();
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -16,7 +17,7 @@ namespace Project
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new FormAuthorization());
         }
     }
 }

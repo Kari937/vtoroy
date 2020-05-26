@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище WFTModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AgentsSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientsSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="MiddleName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DealsSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAgent" Type="int" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="IdTypeOfGoods" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeOfGoodsSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Manufacturer" Type="nvarchar(max)" />
+          <Property Name="Model" Type="nvarchar(max)" />
+          <Property Name="Country" Type="nvarchar(max)" />
+          <Property Name="PriceMax" Type="nvarchar(max)" />
+          <Property Name="PriceMin" Type="nvarchar(max)" />
+          <Property Name="Year" Type="nvarchar(max)" />
+          <Property Name="SIMСards" Type="nvarchar(max)" />
+          <Property Name="Color" Type="nvarchar(max)" />
+          <Property Name="Type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DealsSet_AgentsSet">
+          <End Role="AgentsSet" Type="Self.AgentsSet" Multiplicity="1" />
+          <End Role="DealsSet" Type="Self.DealsSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DealsSet">
+              <PropertyRef Name="IdAgent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DealsSet_ClientsSet">
+          <End Role="ClientsSet" Type="Self.ClientsSet" Multiplicity="1" />
+          <End Role="DealsSet" Type="Self.DealsSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DealsSet">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DealsSet_TypeOfGoodsSet">
+          <End Role="TypeOfGoodsSet" Type="Self.TypeOfGoodsSet" Multiplicity="1" />
+          <End Role="DealsSet" Type="Self.DealsSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfGoodsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DealsSet">
+              <PropertyRef Name="IdTypeOfGoods" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище WFTModelContainer">
+          <EntitySet Name="AgentsSet" EntityType="Self.AgentsSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientsSet" EntityType="Self.ClientsSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DealsSet" EntityType="Self.DealsSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOfGoodsSet" EntityType="Self.TypeOfGoodsSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DealsSet_AgentsSet" Association="Self.FK_DealsSet_AgentsSet">
+            <End Role="AgentsSet" EntitySet="AgentsSet" />
+            <End Role="DealsSet" EntitySet="DealsSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DealsSet_ClientsSet" Association="Self.FK_DealsSet_ClientsSet">
+            <End Role="ClientsSet" EntitySet="ClientsSet" />
+            <End Role="DealsSet" EntitySet="DealsSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DealsSet_TypeOfGoodsSet" Association="Self.FK_DealsSet_TypeOfGoodsSet">
+            <End Role="TypeOfGoodsSet" EntitySet="TypeOfGoodsSet" />
+            <End Role="DealsSet" EntitySet="DealsSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WFTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AgentsSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DealsSet" Relationship="Self.FK_DealsSet_AgentsSet" FromRole="AgentsSet" ToRole="DealsSet" />
+        </EntityType>
+        <EntityType Name="ClientsSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DealsSet" Relationship="Self.FK_DealsSet_ClientsSet" FromRole="ClientsSet" ToRole="DealsSet" />
+        </EntityType>
+        <EntityType Name="DealsSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAgent" Type="Int32" Nullable="false" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="IdTypeOfGoods" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AgentsSet" Relationship="Self.FK_DealsSet_AgentsSet" FromRole="DealsSet" ToRole="AgentsSet" />
+          <NavigationProperty Name="ClientsSet" Relationship="Self.FK_DealsSet_ClientsSet" FromRole="DealsSet" ToRole="ClientsSet" />
+          <NavigationProperty Name="TypeOfGoodsSet" Relationship="Self.FK_DealsSet_TypeOfGoodsSet" FromRole="DealsSet" ToRole="TypeOfGoodsSet" />
+        </EntityType>
+        <EntityType Name="TypeOfGoodsSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Manufacturer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PriceMax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PriceMin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SIMСards" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DealsSet" Relationship="Self.FK_DealsSet_TypeOfGoodsSet" FromRole="TypeOfGoodsSet" ToRole="DealsSet" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DealsSet_AgentsSet">
+          <End Role="AgentsSet" Type="Self.AgentsSet" Multiplicity="1" />
+          <End Role="DealsSet" Type="Self.DealsSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DealsSet">
+              <PropertyRef Name="IdAgent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DealsSet_ClientsSet">
+          <End Role="ClientsSet" Type="Self.ClientsSet" Multiplicity="1" />
+          <End Role="DealsSet" Type="Self.DealsSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DealsSet">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DealsSet_TypeOfGoodsSet">
+          <End Role="TypeOfGoodsSet" Type="Self.TypeOfGoodsSet" Multiplicity="1" />
+          <End Role="DealsSet" Type="Self.DealsSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfGoodsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DealsSet">
+              <PropertyRef Name="IdTypeOfGoods" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WFTEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AgentsSet" EntityType="Self.AgentsSet" />
+          <EntitySet Name="ClientsSet" EntityType="Self.ClientsSet" />
+          <EntitySet Name="DealsSet" EntityType="Self.DealsSet" />
+          <EntitySet Name="TypeOfGoodsSet" EntityType="Self.TypeOfGoodsSet" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_DealsSet_AgentsSet" Association="Self.FK_DealsSet_AgentsSet">
+            <End Role="AgentsSet" EntitySet="AgentsSet" />
+            <End Role="DealsSet" EntitySet="DealsSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DealsSet_ClientsSet" Association="Self.FK_DealsSet_ClientsSet">
+            <End Role="ClientsSet" EntitySet="ClientsSet" />
+            <End Role="DealsSet" EntitySet="DealsSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DealsSet_TypeOfGoodsSet" Association="Self.FK_DealsSet_TypeOfGoodsSet">
+            <End Role="TypeOfGoodsSet" EntitySet="TypeOfGoodsSet" />
+            <End Role="DealsSet" EntitySet="DealsSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище WFTModelContainer" CdmEntityContainer="WFTEntities1">
+          <EntitySetMapping Name="AgentsSet">
+            <EntityTypeMapping TypeName="WFTModel.AgentsSet">
+              <MappingFragment StoreEntitySet="AgentsSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientsSet">
+            <EntityTypeMapping TypeName="WFTModel.ClientsSet">
+              <MappingFragment StoreEntitySet="ClientsSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DealsSet">
+            <EntityTypeMapping TypeName="WFTModel.DealsSet">
+              <MappingFragment StoreEntitySet="DealsSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdAgent" ColumnName="IdAgent" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="IdTypeOfGoods" ColumnName="IdTypeOfGoods" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeOfGoodsSet">
+            <EntityTypeMapping TypeName="WFTModel.TypeOfGoodsSet">
+              <MappingFragment StoreEntitySet="TypeOfGoodsSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PriceMax" ColumnName="PriceMax" />
+                <ScalarProperty Name="PriceMin" ColumnName="PriceMin" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="SIMСards" ColumnName="SIMСards" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="WFTModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -10,11 +10,49 @@ using System.Windows.Forms;
 
 namespace Project
 {
-    public partial class Form1 : Form
+    public partial class Menu : Form
     {
-        public Form1()
+        public Menu()
         {
             InitializeComponent();
+            if (FormAuthorization.users.type == "agent") buttonOpenProd.Enabled = false;
+            labelHello.Text = "Приветствую тебя, " + FormAuthorization.users.login;
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonOpenClients_Click(object sender, EventArgs e)
+        {
+            Form formClient = new FormClient();
+            formClient.Show();
+        }
+
+        private void buttonOpenProd_Click(object sender, EventArgs e)
+        {
+            Form formAgent = new AgentSet();
+            formAgent.Show();
+
+        }
+
+        private void buttonOpenGoods_Click(object sender, EventArgs e)
+        {
+            Form formGoods = new Goods();
+            formGoods.Show();
+        }
+
+        private void buttonOpenDeals_Click(object sender, EventArgs e)
+        {
+            Form formDeals = new FormDeals();
+            formDeals.Show();
+        }
+
+        private void Menu_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
